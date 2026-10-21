@@ -1,0 +1,94 @@
+[project]
+name = "f1"
+version = "0.1.0"
+description = "CLI de análises de Fórmula 1 sobre a OpenF1 API, com cache local em DuckDB."
+authors = [
+    {name = "Bruno Galli",email = "brunogalli85@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "httpx (>=0.28.1,<0.29.0)",
+    "duckdb (>=1.5.6,<2.0.0)"
+]
+
+[project.scripts]
+f1 = "f1.__main__:main"
+
+[tool.poetry]
+packages = [{include = "f1", from = "src"}]
+requires-poetry = ">=2.0,<3.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+extend-exclude = ["docs", "notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "D"]
+ignore = ["E501", "D104", "D105", "D107", "W191", "D206", "D300"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["D"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["f1"]
+
+[tool.ruff.format]
+quote-style = "double"
+docstring-code-format = true
+
+[tool.taskipy.tasks]
+docs = { cmd = "mkdocs serve", help = "Servidor local da documentação em http://127.0.0.1:8000" }
+docs-build = { cmd = "mkdocs build --strict", help = "Valida a documentação como no CI" }
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--import-mode=importlib",
+    "-ra",
+    "--cov=f1",
+    "--cov-report=term-missing",
+]
+markers = [
+    "integration: testes que dependem de serviços locais (ex.: banco em container)",
+    "e2e: testes ponta a ponta que chamam a OpenF1 API real",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["f1"]
+
+[tool.coverage.report]
+fail_under = 50
+show_missing = true
+skip_covered = true
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.17.1,<0.18.0)",
+    "pytest (>=9.1.1,<10.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)",
+    "pre-commit (>=4.7.0,<5.0.0)",
+    "taskipy (>=1.14.1,<2.0.0)"
+]
+docs = [
+    "mkdocs (>=1.6,<2)",
+    "mkdocs-material (>=9.7.7,<10.0.0)"
+]

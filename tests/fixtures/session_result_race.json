@@ -1,0 +1,67 @@
+[
+  {
+    "position": 1,
+    "driver_number": 1,
+    "number_of_laps": 57,
+    "points": 25.0,
+    "dnf": false,
+    "dns": false,
+    "dsq": false,
+    "duration": 5465.323,
+    "gap_to_leader": 0,
+    "meeting_key": 1251,
+    "session_key": 9655
+  },
+  {
+    "position": 2,
+    "driver_number": 16,
+    "number_of_laps": 57,
+    "points": 18.0,
+    "dnf": false,
+    "dns": false,
+    "dsq": false,
+    "gap_to_leader": 6.031,
+    "duration": 5471.354,
+    "meeting_key": 1251,
+    "session_key": 9655
+  },
+  {
+    "position": 3,
+    "driver_number": 81,
+    "number_of_laps": 57,
+    "points": 15.0,
+    "dnf": false,
+    "dns": false,
+    "dsq": false,
+    "gap_to_leader": 6.819,
+    "duration": 5472.142,
+    "meeting_key": 1251,
+    "session_key": 9655
+  },
+  {
+    "position": 15,
+    "driver_number": 23,
+    "number_of_laps": 56,
+    "points": 0.0,
+    "dnf": false,
+    "dns": false,
+    "dsq": false,
+    "gap_to_leader": "+1 LAP",
+    "duration": null,
+    "meeting_key": 1251,
+    "session_key": 9655
+  },
+  {
+    "position": null,
+    "driver_number": 18,
+    "number_of_laps": 8,
+    "points": 0.0,
+    "dnf": true,
+    "dns": false,
+    "dsq": false,
+    "gap_to_leader": null,
+    "duration": null,
+    "meeting_key": 1251,
+    "session_key": 9655
+  }
+]

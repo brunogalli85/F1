@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Poetry
+        run: pipx install "poetry>=2.0,<3.0"
+
+      - name: Validar pyproject e lock
+        run: poetry check --lock
+
+      - name: Instalar dependências
+        run: poetry install --no-interaction
+
+      - name: Lint
+        run: poetry run ruff check .
+
+      - name: Formatação (somente verificação)
+        run: poetry run ruff format --check .
+
+      - name: Testes + cobertura (gate de 50%)
+        run: poetry run pytest -m "not integration and not e2e"
+
+      - name: Documentação
+        run: poetry run mkdocs build --strict
